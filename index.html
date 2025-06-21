@@ -256,11 +256,13 @@
           <p>${ext.description}</p>
           <div class="card-controls">
             <button class="remove-btn"  data-id="${ext.name}">Remove</button>
-            <div class="toggle ${ext.isActive ? 'active' : ''}"></div>
+            <div class="toggle ${ext.isActive ? 'active' : 'Inactive'}"></div>
           </div>
         `;
         card.querySelector('.toggle').addEventListener('click', function () {
-          this.classList.toggle('active');
+          ext.isActive = !ext.isActive; 
+          this.classList.toggle('active', ext.isActive);
+          this.classList.toggle('Inactive', !ext.isActive);
         });
         card.querySelector('.remove-btn').addEventListener('click', function () {
           const idToRemove = this.getAttribute('data-id');
@@ -270,10 +272,6 @@
           renderExtensions(extensions); // re-render updated list
         });
 
-        // Toggle logic
-        card.querySelector('.toggle').addEventListener('click', function () {
-          this.classList.toggle('active');
-        });
 
         extensionGrid.appendChild(card);
       });
